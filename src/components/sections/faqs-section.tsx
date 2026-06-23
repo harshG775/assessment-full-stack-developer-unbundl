@@ -1,7 +1,28 @@
 import { useState } from "react"
 import { Plus } from "lucide-react"
 import { useFaqs } from "#/hooks/use-faqs"
+import Skeleton from "#/components/ui/skeleton"
 import styles from "./faqs-section.module.css"
+
+const FAQ_SKELETON_COUNT = 5
+
+function FaqsSkeleton() {
+    return (
+        <ul className={styles.list} aria-busy="true" aria-label="Loading FAQs">
+            {Array.from({ length: FAQ_SKELETON_COUNT }).map((_, i) => (
+                <li key={i} className={styles.item}>
+                    <div className={styles.trigger}>
+                        <Skeleton
+                            height="16px"
+                            style={{ width: `${65 + (i % 3) * 10}%` }}
+                        />
+                        <Skeleton variant="circle" width="20px" height="20px" />
+                    </div>
+                </li>
+            ))}
+        </ul>
+    )
+}
 
 export default function FaqsSection() {
     const { faqs, isLoading, error } = useFaqs()
@@ -19,7 +40,7 @@ export default function FaqsSection() {
                     <span className={styles.headingMain}>We&apos;ve got answers</span>
                 </h2>
 
-                {isLoading && <p className={styles.status}>Loading FAQs...</p>}
+                {isLoading && <FaqsSkeleton />}
 
                 {error && (
                     <p className={styles.status} role="alert">
