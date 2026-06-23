@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiV1WhyWhistleRouteImport } from './routes/api/v1/why-whistle'
 import { Route as ApiV1HealthRouteImport } from './routes/api/v1/health'
 import { Route as ApiV1FaqsRouteImport } from './routes/api/v1/faqs'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiV1WhyWhistleRoute = ApiV1WhyWhistleRouteImport.update({
+  id: '/api/v1/why-whistle',
+  path: '/api/v1/why-whistle',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiV1HealthRoute = ApiV1HealthRouteImport.update({
@@ -33,30 +39,39 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api/v1/faqs': typeof ApiV1FaqsRoute
   '/api/v1/health': typeof ApiV1HealthRoute
+  '/api/v1/why-whistle': typeof ApiV1WhyWhistleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api/v1/faqs': typeof ApiV1FaqsRoute
   '/api/v1/health': typeof ApiV1HealthRoute
+  '/api/v1/why-whistle': typeof ApiV1WhyWhistleRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/api/v1/faqs': typeof ApiV1FaqsRoute
   '/api/v1/health': typeof ApiV1HealthRoute
+  '/api/v1/why-whistle': typeof ApiV1WhyWhistleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/v1/faqs' | '/api/v1/health'
+  fullPaths: '/' | '/api/v1/faqs' | '/api/v1/health' | '/api/v1/why-whistle'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/v1/faqs' | '/api/v1/health'
-  id: '__root__' | '/' | '/api/v1/faqs' | '/api/v1/health'
+  to: '/' | '/api/v1/faqs' | '/api/v1/health' | '/api/v1/why-whistle'
+  id:
+    | '__root__'
+    | '/'
+    | '/api/v1/faqs'
+    | '/api/v1/health'
+    | '/api/v1/why-whistle'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiV1FaqsRoute: typeof ApiV1FaqsRoute
   ApiV1HealthRoute: typeof ApiV1HealthRoute
+  ApiV1WhyWhistleRoute: typeof ApiV1WhyWhistleRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -66,6 +81,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/why-whistle': {
+      id: '/api/v1/why-whistle'
+      path: '/api/v1/why-whistle'
+      fullPath: '/api/v1/why-whistle'
+      preLoaderRoute: typeof ApiV1WhyWhistleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/v1/health': {
@@ -89,6 +111,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiV1FaqsRoute: ApiV1FaqsRoute,
   ApiV1HealthRoute: ApiV1HealthRoute,
+  ApiV1WhyWhistleRoute: ApiV1WhyWhistleRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
