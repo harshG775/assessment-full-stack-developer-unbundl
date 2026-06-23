@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiV1WhyWhistleRouteImport } from './routes/api/v1/why-whistle'
 import { Route as ApiV1HealthRouteImport } from './routes/api/v1/health'
 import { Route as ApiV1FaqsRouteImport } from './routes/api/v1/faqs'
+import { Route as ApiV1ComparisonRouteImport } from './routes/api/v1/comparison'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,15 +35,22 @@ const ApiV1FaqsRoute = ApiV1FaqsRouteImport.update({
   path: '/api/v1/faqs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiV1ComparisonRoute = ApiV1ComparisonRouteImport.update({
+  id: '/api/v1/comparison',
+  path: '/api/v1/comparison',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/v1/comparison': typeof ApiV1ComparisonRoute
   '/api/v1/faqs': typeof ApiV1FaqsRoute
   '/api/v1/health': typeof ApiV1HealthRoute
   '/api/v1/why-whistle': typeof ApiV1WhyWhistleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/v1/comparison': typeof ApiV1ComparisonRoute
   '/api/v1/faqs': typeof ApiV1FaqsRoute
   '/api/v1/health': typeof ApiV1HealthRoute
   '/api/v1/why-whistle': typeof ApiV1WhyWhistleRoute
@@ -50,18 +58,30 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/v1/comparison': typeof ApiV1ComparisonRoute
   '/api/v1/faqs': typeof ApiV1FaqsRoute
   '/api/v1/health': typeof ApiV1HealthRoute
   '/api/v1/why-whistle': typeof ApiV1WhyWhistleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/v1/faqs' | '/api/v1/health' | '/api/v1/why-whistle'
+  fullPaths:
+    | '/'
+    | '/api/v1/comparison'
+    | '/api/v1/faqs'
+    | '/api/v1/health'
+    | '/api/v1/why-whistle'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/v1/faqs' | '/api/v1/health' | '/api/v1/why-whistle'
+  to:
+    | '/'
+    | '/api/v1/comparison'
+    | '/api/v1/faqs'
+    | '/api/v1/health'
+    | '/api/v1/why-whistle'
   id:
     | '__root__'
     | '/'
+    | '/api/v1/comparison'
     | '/api/v1/faqs'
     | '/api/v1/health'
     | '/api/v1/why-whistle'
@@ -69,6 +89,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiV1ComparisonRoute: typeof ApiV1ComparisonRoute
   ApiV1FaqsRoute: typeof ApiV1FaqsRoute
   ApiV1HealthRoute: typeof ApiV1HealthRoute
   ApiV1WhyWhistleRoute: typeof ApiV1WhyWhistleRoute
@@ -104,11 +125,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiV1FaqsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/v1/comparison': {
+      id: '/api/v1/comparison'
+      path: '/api/v1/comparison'
+      fullPath: '/api/v1/comparison'
+      preLoaderRoute: typeof ApiV1ComparisonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiV1ComparisonRoute: ApiV1ComparisonRoute,
   ApiV1FaqsRoute: ApiV1FaqsRoute,
   ApiV1HealthRoute: ApiV1HealthRoute,
   ApiV1WhyWhistleRoute: ApiV1WhyWhistleRoute,
