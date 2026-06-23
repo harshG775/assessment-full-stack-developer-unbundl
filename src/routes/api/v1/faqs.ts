@@ -1,10 +1,6 @@
+import type { Faq } from "#/types/faqs.type"
 import { createFileRoute } from "@tanstack/react-router"
 
-export interface Faq {
-    id: string
-    question: string
-    answer: string
-}
 
 const faqs: Faq[] = [
     {
