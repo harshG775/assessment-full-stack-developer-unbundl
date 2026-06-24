@@ -12,12 +12,12 @@
 
 .headingAccent {
     color: var(--color-primary);
-    font-weight: var(--fw-bold);
+    font-weight: var(--fw-extrabold);
 }
 
 .headingMain {
     color: var(--color-text-primary);
-    font-weight: var(--fw-bold);
+    font-weight: var(--fw-extrabold);
 }
 
 .status {

@@ -85,8 +85,10 @@ export default function WhyWhistleSection() {
                                         className={styles.image}
                                         loading="lazy"
                                     />
-                                    <h3 className={styles.cardTitle}>{feature.title}</h3>
-                                    <p className={styles.cardDescription}>{feature.description}</p>
+                                    <div className={styles.cardContent}>
+                                        <h3 className={styles.cardTitle}>{feature.title}</h3>
+                                        <p className={styles.cardDescription}>{feature.description}</p>
+                                    </div>
                                 </article>
                             ))}
                         </div>
