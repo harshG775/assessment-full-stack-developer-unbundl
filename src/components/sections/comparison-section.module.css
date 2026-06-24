@@ -45,16 +45,10 @@
 .th {
     text-align: left;
     font-size: var(--fs-sm);
-    font-weight: var(--fw-semibold);
-    color: var(--color-text-secondary);
+    font-weight: var(--fw-bold);
+    color: var(--color-black);
     padding: var(--space-4) var(--space-5);
     border-bottom: 1px solid var(--color-border);
-}
-
-.whistleLabel {
-    font-family: var(--font-heading);
-    font-weight: var(--fw-bold);
-    color: var(--color-primary);
 }
 
 .row {
@@ -97,6 +91,8 @@
     flex-shrink: 0;
     border-radius: var(--radius-full);
     padding: 2px;
+    width: 1.5rem;
+    height: 1.5rem;
 }
 
 .statusCell[data-status="yes"] .statusIcon {

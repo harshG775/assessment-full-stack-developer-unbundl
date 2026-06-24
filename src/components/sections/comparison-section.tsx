@@ -16,7 +16,7 @@ function StatusCell({ value }: { value: ComparisonValue }) {
             ) : (
                 <X className={styles.statusIcon} size={16} aria-hidden="true" />
             )}
-            <span className={styles.statusLabel}>{value.label}</span>
+            {value.label && <span className={styles.statusLabel}>{value.label}</span>}
         </span>
     )
 }
@@ -69,9 +69,11 @@ export default function ComparisonSection() {
                         <table className={styles.table}>
                             <thead>
                                 <tr>
-                                    <th className={styles.th}>Features</th>
+                                    <th className={styles.th} style={{ width: "100%" }}>
+                                        Features
+                                    </th>
                                     <th className={styles.th}>
-                                        <span className={styles.whistleLabel}>whistle</span>
+                                        <img src="/whistle.png" alt="whistle" />
                                     </th>
                                     <th className={styles.th}>Other Brands</th>
                                 </tr>
